@@ -3,8 +3,6 @@ import path from 'path'
 import { BrowserWindow, app, globalShortcut } from 'electron'
 import { initBeforeQuitHook } from './hooks'
 import initExtensions from './extensions'
-import initControllers from './controllers'
-import DataStore from './db'
 
 let mainWindow = null
 
@@ -15,12 +13,17 @@ function createWindow() {
     width: 400,
     height: 600,
     center: true,
-    show: false,
+    show: true,
     resizable: false,
     maximizable: false,
     title: 'webflow',
-    titleBarStyle: 'hiddenInset',
-    webPreferences: { nodeIntegration: true }
+    titleBarStyle: 'hidden',
+
+    webPreferences: {
+      preload: path.join(__dirname, 'client/bridge.js'),
+      nodeIntegration: false,
+      plugins: true
+    }
   })
 
   if (process.env.NODE_ENV === 'development') {
@@ -28,15 +31,6 @@ function createWindow() {
     initExtensions(['VUEJS_DEVTOOLS'])
     mainWindow.webContents.openDevTools()
   }
-
-  // 初始化Controllers
-  initControllers()
-  // 设置全局配置
-  DataStore.setConfig({})
-
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-  })
 
   mainWindow.on('close', () => {
     mainWindow = null
@@ -54,7 +48,7 @@ function createWindow() {
     // 载入html文件
     mainWindow.loadURL(
       url.format({
-        pathname: path.resolve(__dirname, '../client', 'index.html'),
+        pathname: path.resolve(__dirname, 'index.html'),
         protocol: 'file',
         slashes: true
       })

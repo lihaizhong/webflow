@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron'
+import { ipcMain as ipc } from 'electron'
 import ProjectController from './ProjectController'
 
 const ControllerManager = {}
@@ -9,7 +9,7 @@ controllers.forEach(Controller => {
 })
 
 export default function initControllers() {
-  ipcMain.on('request-api', (event, request) => {
+  ipc.on('request-api', (event, request) => {
     try {
       const methods = (request.method || '').split('.')
       const className = methods[0]

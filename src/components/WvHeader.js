@@ -17,6 +17,7 @@ export default class WvHeader extends HTMLElement {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+          user-select: none;
         }
       </style>
     `
