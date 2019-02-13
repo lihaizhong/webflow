@@ -1,6 +1,5 @@
-import url from 'url'
-import path from 'path'
 import { BrowserWindow, app, globalShortcut } from 'electron'
+import config from './config'
 import { initBeforeQuitHook } from './hooks'
 import initExtensions from './extensions'
 
@@ -10,19 +9,19 @@ let mainWindow = null
 function createWindow() {
   // 创建主窗口
   mainWindow = new BrowserWindow({
-    width: 400,
-    height: 600,
+    title: config.title,
+    width: config.width,
+    height: config.height,
     center: true,
     show: true,
-    resizable: false,
-    maximizable: false,
-    title: 'webflow',
-    titleBarStyle: 'hidden',
+    resizable: config.resizable,
+    maximizable: config.maximizable,
+    titleBarStyle: config.titleBarStyle,
 
     webPreferences: {
-      preload: path.join(__dirname, 'client/bridge.js'),
-      nodeIntegration: false,
-      plugins: true
+      preload: config.preload,
+      nodeIntegration: config.nodeIntegration,
+      plugins: config.plugins
     }
   })
 
@@ -37,22 +36,9 @@ function createWindow() {
   })
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL(
-      url.format({
-        pathname: 'localhost:8080',
-        protocol: 'http',
-        slashes: true
-      })
-    )
+    mainWindow.loadURL(config.dev.url)
   } else {
-    // 载入html文件
-    mainWindow.loadURL(
-      url.format({
-        pathname: path.resolve(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true
-      })
-    )
+    mainWindow.loadURL(config.build.url)
   }
 }
 

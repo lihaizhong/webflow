@@ -103,3 +103,5 @@ JSON Schema 是一种基于 JSON 格式定义 JSON 数据结构的孤帆。
 ## 参考
 
 [JSON Schema 参考书](https://imweb.io/topic/57b5f69373ac222929653f23)
+
+[JSON Schema ORG](https://json-schema.org/)

@@ -4,6 +4,6 @@ function setHook(mainWindow, channel, ...args) {
   }
 }
 
-export function initBeforeQuitHook(mainWindow, ...args) {
-  setHook(mainWindow, 'before-quit', ...args)
+export function initBeforeQuitHook(mainWindow) {
+  setHook(mainWindow, 'before-quit')
 }
