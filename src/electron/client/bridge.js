@@ -17,29 +17,39 @@ const Bridge = function() {}
 /**
  * @static Worker存储器
  */
-Bridge.WorkerStore = new Array()
+Bridge.BridgeStore = new Map()
 
 /**
  * @static 添加Worker
  * @param {Object} worker 工作进程
+ * @param {Object} bridge Bridge实例
  */
-Bridge.pushWorkerStore = function(worker) {
+Bridge.pushWorkerStore = function(worker, bridge) {
+  const workerStore = Bridge.BridgeStore.get(bridge)
   let store = []
-  Bridge.WorkerStore.push(worker)
+  // 添加新任务
+  workerStore.push(worker)
   // 移除已结束的worker
-  Bridge.WorkerStore.forEach(worker => worker.killed || store.push(worker))
+  workerStore.forEach(worker => worker.killed || store.push(worker))
   // 重置worker管理器
-  Bridge.WorkerStore = store
+  Bridge.BridgeStore.set(bridge, store)
 }
 
 initShell(Bridge)
 initDialog(Bridge)
 
-const bridge = (window.bridge = new Bridge())
-
 // 再退出应用前关闭所有正在工作的worker
 ipc.on('before-quit', () => {
-  Bridge.WorkerStore.forEach(worker => bridge.kill(worker))
+  Bridge.BridgeStore.forEach((workerStore, bridge) => {
+    workerStore.forEach(worker => bridge.kill(worker))
+  })
 })
+
+window.getNewBridgeInstance = function() {
+  const bridge = new Bridge()
+  Bridge.BridgeStore.set(bridge, [])
+
+  return bridge
+}
 
 console.info('bridge脚本注入成功！')

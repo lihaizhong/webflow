@@ -3,13 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueIcons from './utils/vue-icons'
-import './components'
+import { ignoreCustomElements } from './components'
 
 import 'reset-css/less/reset.less'
 
 Vue.use(VueIcons)
 
-Vue.config.ignoreElements = [/^wv-/]
+Vue.config.ignoreElements = [ignoreCustomElements]
 Vue.config.productionTip = false
 
 new Vue({

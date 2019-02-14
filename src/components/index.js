@@ -37,3 +37,5 @@ function createCustomElements(components) {
 }
 
 createCustomElements(WEB_COMPONENTS)
+
+export const ignoreCustomElements = /^wv-/

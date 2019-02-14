@@ -42,6 +42,7 @@ export default function initShell(Bridge) {
     )
     // 监听错误信息
     worker.on('error', error => callback(error, null))
+
     return worker
   }
 
