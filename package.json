@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "cross-env NODE_ENV=development npm run build:electron && npm run serve",
-    "build": "npm run build:vue && cross-env NODE_ENV=production npm run build:electron",
+    "build": " cross-env NODE_ENV=production npm run build:vue &&npm run build:electron",
     "build:vue": "vue-cli-service build",
     "build:electron": "webpack --config ./build/webpack.main.js",
     "lint": "vue-cli-service lint"

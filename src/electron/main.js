@@ -17,11 +17,13 @@ function createWindow() {
     resizable: config.resizable,
     maximizable: config.maximizable,
     titleBarStyle: config.titleBarStyle,
+    allowRunningInsecureContent: process.env.NODE_ENV !== 'production',
 
     webPreferences: {
       preload: config.preload,
       nodeIntegration: config.nodeIntegration,
-      plugins: config.plugins
+      plugins: config.plugins,
+      contextIsolation: false
     }
   })
 

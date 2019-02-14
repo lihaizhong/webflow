@@ -3,11 +3,8 @@
     <wv-header class="header">webflow</wv-header>
     <router-view />
     <wv-footer class="footer">
-      <div class="pull-left">
-        <button class="fbtn">添加项目</button>
-      </div>
       <div class="pull-right">
-        <button class="fbtn">设置</button>
+        <button v-once class="fbtn iconfont" v-html="$icons.Setting"></button>
       </div>
     </wv-footer>
   </div>
@@ -28,10 +25,44 @@ export default {
 </script>
 
 <style lang="less">
+@font-face {
+  .mixin(@env) when (@env = 'development') {
+    font-family: 'iconfont'; /* project id 1043725 */
+    src: url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.eot');
+    src: url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.eot?#iefix')
+        format('embedded-opentype'),
+      url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.woff2') format('woff2'),
+      url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.woff') format('woff'),
+      url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.ttf') format('truetype'),
+      url('//at.alicdn.com/t/font_1043725_jb1pf7tf44.svg#iconfont')
+        format('svg');
+  }
+
+  .mixin(@env) when (@env = 'production') {
+    font-family: 'iconfont';
+    src: url('../font/font_1043725_jb1pf7tf44.eot');
+    src: url('../font/font_1043725_jb1pf7tf44.eot?#iefix')
+        format('embedded-opentype'),
+      url('../font/font_1043725_jb1pf7tf44.woff2') format('woff2'),
+      url('../font/font_1043725_jb1pf7tf44.woff') format('woff'),
+      url('../font/font_1043725_jb1pf7tf44.ttf') format('truetype'),
+      url('../font/font_1043725_jb1pf7tf44.svg#iconfont') format('svg');
+  }
+}
+
 html,
 body {
   min-height: 100vh;
   background: #e2e1e4;
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .clearfix {

@@ -1,4 +1,5 @@
 import { exec } from 'shelljs'
+import { shell } from 'electron'
 
 export default function initShell(Bridge) {
   /**
@@ -53,5 +54,9 @@ export default function initShell(Bridge) {
     worker.connected && worker.disconnect()
     // 杀死进程
     worker.killed || worker.kill('SIGINT')
+  }
+
+  Bridge.prototype.openExternal = function(url) {
+    shell.openExternal(url)
   }
 }

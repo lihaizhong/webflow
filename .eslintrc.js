@@ -8,6 +8,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-var': ['error'],
+    'vue/no-v-html': 'off',
     'vue/attributes-order': 'error',
     'vue/no-confusing-v-for-v-if': 'error',
     'vue/order-in-components': 'error',
