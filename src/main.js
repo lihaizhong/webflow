@@ -6,6 +6,7 @@ import VueIcons from './utils/vue-icons'
 import { ignoreCustomElements } from './components'
 
 import 'reset-css/less/reset.less'
+import './styles/index'
 
 Vue.use(VueIcons)
 

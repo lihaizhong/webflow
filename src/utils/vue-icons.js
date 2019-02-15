@@ -1,3 +1,7 @@
+/**
+ * 图标统一管理，方便后续替换
+ */
+
 let installed = false
 
 const icons = {
